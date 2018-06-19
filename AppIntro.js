@@ -15,13 +15,15 @@ import Swiper from 'react-native-swiper';
 import DoneButton from './components/DoneButton';
 import SkipButton from './components/SkipButton';
 import RenderDots from './components/Dots';
+import { device } from '../../src/common/Util';
 
 const windowsWidth = Dimensions.get('window').width;
 const windowsHeight = Dimensions.get('window').height;
 
 const defaulStyles = {
   header: {
-    flex: 0.5,
+    // flex: 1,
+    height:device.height,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -95,6 +97,7 @@ const defaulStyles = {
     fontSize: 25,
     fontWeight: 'bold',
     fontFamily: 'Arial',
+    color: 'red'
   },
   full: {
     height: 80,
@@ -217,14 +220,14 @@ export default class AppIntro extends Component {
           styles: this.styles
         })}
         {this.props.showDoneButton ? <DoneButton
-            {...this.props}
-            {...this.state}
-            isDoneBtnShow={isDoneBtnShow}
-            styles={this.styles}
-            onNextBtnClick={this.onNextBtnClick.bind(this, context)}
-            onDoneBtnClick={this.props.onDoneBtnClick} /> :
-            <View style={this.styles.btnContainer} />
-          }
+          {...this.props}
+          {...this.state}
+          isDoneBtnShow={isDoneBtnShow}
+          styles={this.styles}
+          onNextBtnClick={this.onNextBtnClick.bind(this, context)}
+          onDoneBtnClick={this.props.onDoneBtnClick} /> :
+          <View style={this.styles.btnContainer} />
+        }
       </View>
     );
   }
@@ -241,7 +244,7 @@ export default class AppIntro extends Component {
     const AnimatedStyle1 = this.getTransform(index, 10, level);
     const AnimatedStyle2 = this.getTransform(index, 0, level);
     const AnimatedStyle3 = this.getTransform(index, 15, level);
-    const imgSource = (typeof img === 'string') ? {uri: img} : img;
+    const imgSource = (typeof img === 'string') ? { uri: img } : img;
     const pageView = (
       <View style={[this.styles.slide, { backgroundColor }]} showsPagination={false} key={index}>
         <Animated.View style={[this.styles.header, ...AnimatedStyle1.transform]}>
@@ -392,14 +395,14 @@ AppIntro.propTypes = {
 
 AppIntro.defaultProps = {
   dotColor: 'rgba(255,255,255,.3)',
-  activeDotColor: '#fff',
-  rightTextColor: '#fff',
-  leftTextColor: '#fff',
+  activeDotColor: 'black',
+  rightTextColor: 'black',
+  leftTextColor: 'black',
   pageArray: [],
-  onSlideChange: () => {},
-  onSkipBtnClick: () => {},
-  onDoneBtnClick: () => {},
-  onNextBtnClick: () => {},
+  onSlideChange: () => { },
+  onSkipBtnClick: () => { },
+  onDoneBtnClick: () => { },
+  onNextBtnClick: () => { },
   doneBtnLabel: 'Done',
   skipBtnLabel: 'Skip',
   nextBtnLabel: '›',
@@ -408,3 +411,4 @@ AppIntro.defaultProps = {
   showDoneButton: true,
   showDots: true
 };
+
